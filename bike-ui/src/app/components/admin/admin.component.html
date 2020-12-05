@@ -1,37 +1,54 @@
 <div class="container">
-  <table class="table table-bordered table-inverse">
-    <tr>
-      <th>Owner Name</th>
-      <th>Email</th>
-      <th>Model</th>
-      <th class="text-right">Purchase Price</th>
-      <th>Delete</th>
-    </tr>
-    <tr *ngFor="let bike of bikes">
-      <td>
-        <a
-          [routerLink]="['/admin/view', bike.id]"
-          routerLinkActive="router-link-active"
-        >
-          {{ bike.name }}
-        </a>
-      </td>
-      <td>
-        {{ bike.email }}
-      </td>
-      <td>
-        {{ bike.model }}
-      </td>
-      <td class="text-right">
-        {{ bike.purchasePrice }}
-      </td>
-      <td class="text-center">
-        <fa-icon
-          class="cursor-pointer"
-          (click)="deleteBike(bike.id)"
-          [icon]="trashIcon"
-        ></fa-icon>
-      </td>
-    </tr>
-  </table>
+  <form [formGroup]="adminForm">
+    <div formArrayName="adminList">
+      <table class="table table-bordered table-inverse">
+        <tr>
+          <th>Owner Name</th>
+          <th>Email</th>
+          <th>Model</th>
+          <th class="text-right">Purchase Price</th>
+          <th>Delete</th>
+        </tr>
+        <tr *ngFor="let bike of bikes; let i = index">
+          <td>
+            <a
+              [routerLink]="['/admin/view', bike.id]"
+              routerLinkActive="router-link-active"
+            >
+              {{ bike.name }}
+            </a>
+          </td>
+          <td>
+            {{ bike.email }}
+          </td>
+          <td>
+            {{ bike.model }}
+          </td>
+          <td class="text-right">
+            {{ bike.purchasePrice }}
+          </td>
+          <td class="text-center">
+            <div formGroupName="{{ i }}">
+              <fa-icon
+                class="cursor-pointer"
+                (click)="deleteBike(bike.id)"
+                [icon]="trashIcon"
+              ></fa-icon>
+              <label class="checkbox-container">
+                <input
+                  class="checkbox"
+                  type="checkbox"
+                  formControlName="checkBox"
+                />
+                <span class="checkmark"></span>
+              </label>
+            </div>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <button type="button" class="btn btn-primary" (click)="sendForm()">
+      Delete selected
+    </button>
+  </form>
 </div>
