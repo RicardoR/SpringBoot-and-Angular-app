@@ -8,7 +8,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Bike {
 
     @Id
@@ -20,6 +24,8 @@ public class Bike {
     private String model;
     private String name;
     private String phone;
+
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "MM-dd-yyyy")
     private Date purchaseDate;
     private BigDecimal purchasePrice;
     private String serialNumber;
@@ -39,7 +45,7 @@ public class Bike {
     public void setEmail(String email) {
         this.email = email;
     }
-    
+
     public boolean isContact() {
         return contact;
     }
