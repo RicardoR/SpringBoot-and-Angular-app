@@ -5,6 +5,7 @@
       <th>Email</th>
       <th>Model</th>
       <th class="text-right">Purchase Price</th>
+      <th>Delete</th>
     </tr>
     <tr *ngFor="let bike of bikes">
       <td>
@@ -23,6 +24,13 @@
       </td>
       <td class="text-right">
         {{ bike.purchasePrice }}
+      </td>
+      <td class="text-center">
+        <fa-icon
+          class="cursor-pointer"
+          (click)="deleteBike(bike.id)"
+          [icon]="trashIcon"
+        ></fa-icon>
       </td>
     </tr>
   </table>
