@@ -20,7 +20,7 @@ export class BikeService {
   }
 
   public getBike(id: number): Observable<Bike> {
-    return this._http.get(`{this._basePath}/{id}`) as Observable<Bike>;
+    return this._http.get(`${this._basePath}/+${id}`) as Observable<Bike>;
   }
 
   public createRegistrationBike(bike: Bike): Observable<any> {

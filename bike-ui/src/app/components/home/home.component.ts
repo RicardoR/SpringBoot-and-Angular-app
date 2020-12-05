@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
-import { BikeService } from 'src/app/services/bike.service';
+import { BikeService } from '../../services/bike.service';
 
 @Component({
   selector: 'app-home',
@@ -38,9 +38,8 @@ export class HomeComponent implements OnInit {
   public submitRegistration() {
     if (this.bikeForm.valid) {
       this._bikeService.createRegistrationBike(this.bikeForm.value).subscribe(
-        (data) => {
+        () => {
           this.bikeForm.reset();
-          console.log('BE response', data);
           this.validMessage = 'Your bike has been submitter. Thank you';
           return true;
         },

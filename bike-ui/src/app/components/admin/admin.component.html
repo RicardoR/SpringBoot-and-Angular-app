@@ -8,7 +8,12 @@
     </tr>
     <tr *ngFor="let bike of bikes">
       <td>
-        {{ bike.name }}
+        <a
+          [routerLink]="['/admin/view', bike.id]"
+          routerLinkActive="router-link-active"
+        >
+          {{ bike.name }}
+        </a>
       </td>
       <td>
         {{ bike.email }}

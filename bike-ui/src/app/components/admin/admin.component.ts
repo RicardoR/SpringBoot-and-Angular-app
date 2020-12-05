@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { BikeService } from 'src/app/services/bike.service';
-import { Bike } from 'src/app/shared/model/bike.model';
+import { BikeService } from '../../services/bike.service';
+import { Bike } from '../../shared/model/bike.model';
 
 @Component({
   selector: 'app-admin',
