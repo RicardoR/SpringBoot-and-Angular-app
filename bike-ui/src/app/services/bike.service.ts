@@ -27,4 +27,8 @@ export class BikeService {
     const body = JSON.stringify(bike);
     return this._http.post(this._basePath, body, httpOptions);
   }
+
+  public deleteBike(id: number): Observable<any> {
+    return this._http.delete(`${this._basePath}/+${id}`) as Observable<any>;
+  }
 }

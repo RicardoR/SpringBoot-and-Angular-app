@@ -8,9 +8,8 @@ describe('ViewRegistrationComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ViewRegistrationComponent ]
-    })
-    .compileComponents();
+      declarations: [ViewRegistrationComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {

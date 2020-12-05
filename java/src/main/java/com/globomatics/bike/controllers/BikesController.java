@@ -7,6 +7,7 @@ import com.globomatics.bike.models.repositories.BikeRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -36,5 +37,10 @@ public class BikesController {
     @GetMapping("/{id}")
     public Bike get(@PathVariable("id") long id) {
         return bikeRepository.getOne(id);
+    }
+
+    @DeleteMapping("/{id}")
+    public void delte(@PathVariable("id") long id) {
+        bikeRepository.deleteById(id);
     }
 }
