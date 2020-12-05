@@ -3,7 +3,18 @@ package com.globomatics.bike.models;
 import java.math.BigDecimal;
 import java.sql.Date;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
 public class Bike {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+
     private String email;
     private boolean contact;
     private String model;
@@ -13,10 +24,22 @@ public class Bike {
     private BigDecimal purchasePrice;
     private String serialNumber;
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+    
     public String getEmail() {
         return email;
     }
 
+    public void setEmail(String email) {
+        this.email = email;
+    }
+    
     public boolean isContact() {
         return contact;
     }
@@ -63,10 +86,6 @@ public class Bike {
 
     public void setModel(String model) {
         this.model = model;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
     }
 
     public String getName() {
