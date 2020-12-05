@@ -3,7 +3,7 @@ import { BikeService } from '../../services/bike.service';
 import { Bike } from '../../shared/model/bike.model';
 import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
-
+import { switchMap } from 'rxjs/operators';
 interface formData {
   checkBox: boolean;
   data: Bike;
@@ -54,7 +54,10 @@ export class AdminComponent implements OnInit {
   }
 
   public deleteBike(id: number) {
-    this._bikeService.deleteBike(id).subscribe(() => this._getBikes());
+    this._bikeService
+      .deleteBike(id)
+      .pipe(switchMap(() => this._bikeService.getBikes()))
+      .subscribe((data) => (this.bikes = data));
   }
 
   public sendForm() {
@@ -67,6 +70,10 @@ export class AdminComponent implements OnInit {
     const dataToSend = idList.join(',');
     this._bikeService
       .deleteMultiBikes(dataToSend)
-      .subscribe(() => this._getBikes());
+      .pipe(switchMap(() => this._bikeService.getBikes()))
+      .subscribe((data) => {
+        this.bikes = data;
+        this.adminForm.reset();
+      });
   }
 }
