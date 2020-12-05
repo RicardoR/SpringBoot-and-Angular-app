@@ -10,7 +10,12 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { ViewRegistrationComponent } from './components/view-registration/view-registration.component';
 
 @NgModule({
-  declarations: [AppComponent, AdminComponent, HomeComponent, ViewRegistrationComponent],
+  declarations: [
+    AppComponent,
+    AdminComponent,
+    HomeComponent,
+    ViewRegistrationComponent,
+  ],
   imports: [
     AppRoutingModule,
     BrowserModule,
