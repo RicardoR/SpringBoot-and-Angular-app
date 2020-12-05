@@ -5,4 +5,7 @@ export class Bike {
   model: string;
   name: string;
   phone: string;
+  purchaseDate: Date;
+  purchasePrice: number;
+  serialNumber: string;
 }
