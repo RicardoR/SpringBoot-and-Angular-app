@@ -9,6 +9,7 @@ import { HomeComponent } from './components/home/home.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ViewRegistrationComponent } from './components/view-registration/view-registration.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { CallbackComponent } from './components/callback/callback.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     AdminComponent,
     HomeComponent,
     ViewRegistrationComponent,
+    CallbackComponent,
   ],
   imports: [
     AppRoutingModule,

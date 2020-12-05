@@ -25,7 +25,6 @@ public class BikesController {
     // Only executed when calling "api/v1/bikes" using a GET method
     @GetMapping
     public List<Bike> list() {
-        System.out.println("Recibiendo todas!!");
         return bikeRepository.findAll();
     }
 
@@ -41,12 +40,12 @@ public class BikesController {
     }
 
     @DeleteMapping("/{id}")
-    public void delte(@PathVariable("id") long id) {
+    public void delete(@PathVariable("id") long id) {
         bikeRepository.deleteById(id);
     }
     
     @DeleteMapping("/multi/{idList}")
-    public void delte(@PathVariable List<Long> idList) {
+    public void delete(@PathVariable List<Long> idList) {
         idList.stream().forEach((id) -> bikeRepository.deleteById(id));
     }
 }

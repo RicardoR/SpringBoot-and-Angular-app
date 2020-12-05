@@ -16,11 +16,18 @@ export class BikeService {
   private _basePath = '/server/api/v1/bikes';
 
   public getBikes(): Observable<Bike[]> {
-    return this._http.get(this._basePath) as Observable<Bike[]>;
+    let token = localStorage.getItem('access_token');
+
+    return this._http.get(this._basePath, {
+      headers: new HttpHeaders().set('Authorization', `Bearer ${token}`),
+    }) as Observable<Bike[]>;
   }
 
   public getBike(id: number): Observable<Bike> {
-    return this._http.get(`${this._basePath}/+${id}`) as Observable<Bike>;
+    return this._http.get(
+      `${this._basePath}/+${id}`,
+      this._getHeaders()
+    ) as Observable<Bike>;
   }
 
   public createRegistrationBike(bike: Bike): Observable<any> {
@@ -29,10 +36,23 @@ export class BikeService {
   }
 
   public deleteBike(id: number): Observable<any> {
-    return this._http.delete(`${this._basePath}/${id}`) as Observable<any>;
+    return this._http.delete(
+      `${this._basePath}/${id}`,
+      this._getHeaders()
+    ) as Observable<any>;
   }
 
   public deleteMultiBikes(idList: string): Observable<any> {
-    return this._http.delete(`${this._basePath}/multi/${idList}`);
+    return this._http.delete(
+      `${this._basePath}/multi/${idList}`,
+      this._getHeaders()
+    );
+  }
+
+  private _getHeaders() {
+    let token = localStorage.getItem('access_token');
+    return {
+      headers: new HttpHeaders().set('Authorization', `Bearer ${token}`),
+    };
   }
 }
