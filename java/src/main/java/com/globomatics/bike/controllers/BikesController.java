@@ -21,7 +21,7 @@ public class BikesController {
     @Autowired
     private BikeRepository bikeRepository;
 
-    // Only executed when callin "api/v1/bikes" using a GET method
+    // Only executed when calling "api/v1/bikes" using a GET method
     @GetMapping
     public List<Bike> list() {
         return bikeRepository.findAll();
