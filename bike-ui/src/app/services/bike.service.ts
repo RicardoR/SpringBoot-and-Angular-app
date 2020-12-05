@@ -29,6 +29,10 @@ export class BikeService {
   }
 
   public deleteBike(id: number): Observable<any> {
-    return this._http.delete(`${this._basePath}/+${id}`) as Observable<any>;
+    return this._http.delete(`${this._basePath}/${id}`) as Observable<any>;
+  }
+
+  public deleteMultiBikes(idList: string): Observable<any> {
+    return this._http.delete(`${this._basePath}/multi/${idList}`);
   }
 }
