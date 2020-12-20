@@ -8,7 +8,7 @@ import { AuthGuard } from './services/auth.guard';
 
 const routes: Routes = [
   {
-    path: '',
+    path: 'home',
     component: HomeComponent,
   },
   {
@@ -25,6 +25,15 @@ const routes: Routes = [
     path: 'callback',
     component: CallbackComponent,
   },
+  {
+    path: 'dashboard',
+    canActivate: [AuthGuard],
+    loadChildren: () =>
+      import('./layouts/admin-layout/admin-layout.module').then(
+        (m) => m.AdminLayoutModule
+      ),
+  },
+  { path: '**', redirectTo: 'dashboard/home', pathMatch: 'full' },
 ];
 
 @NgModule({
