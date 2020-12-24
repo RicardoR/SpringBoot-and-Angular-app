@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { BikeService } from '../../services/bike.service';
+import { BikeService } from '../../core/services/bike.service';
 import { Bike } from '../../shared/model/bike.model';
 
 @Component({
@@ -20,7 +20,7 @@ export class ViewRegistrationComponent implements OnInit {
     this.getBikeReg(this._route.snapshot.params.id);
   }
 
-  public getBikeReg(id: number) {
+  public getBikeReg(id: number): void {
     this._bikeService.getBike(id).subscribe(
       (data: Bike) => (this.bikeReg = data),
       (err) => console.log(err),

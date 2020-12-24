@@ -1,3 +1,4 @@
+import { DashboardResolver } from './../../components/dashboard/dashboard.resolver';
 import { Routes, RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 
@@ -10,7 +11,11 @@ export const adminLayoutRoutes: Routes = [
     path: '',
     component: AdminLayoutComponent,
     children: [
-      { path: 'home', component: DashboardComponent },
+      {
+        path: 'home',
+        component: DashboardComponent,
+        resolve: { dashboardData: DashboardResolver },
+      },
       { path: 'user-profile', component: UserProfileComponent },
     ],
   },

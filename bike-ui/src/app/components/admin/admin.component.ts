@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { BikeService } from '../../services/bike.service';
+import { BikeService } from '../../core/services/bike.service';
 import { Bike } from '../../shared/model/bike.model';
 import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';

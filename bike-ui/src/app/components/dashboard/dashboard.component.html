@@ -2,15 +2,14 @@
   <div class="container-fluid">
     <div class="row">
       <div class="col-lg-3 col-md-6 col-sm-6">
-        <app-stat-card cardType="{{ availableCardTypes.warning }}">
+        <app-stat-card cardType="{{ availableCardTypes.success }}">
           <card-header-icon>
-            <i class="material-icons">content_copy</i>
+            <i class="material-icons">assessment</i>
           </card-header-icon>
-          <card-category>Used Space</card-category>
-          <card-title>49/50 <small>GB</small></card-title>
+          <card-category>Total sales</card-category>
+          <card-title>{{ totalSales }} </card-title>
           <card-footer-icon>
-            <i class="material-icons text-danger">warning</i>
-            <a href="javascript:void(0)">Get More Space...</a>
+            <i class="material-icons">update</i> Just Updated
           </card-footer-icon>
         </app-stat-card>
       </div>
@@ -20,7 +19,7 @@
             <i class="material-icons">store</i>
           </card-header-icon>
           <card-category>Revenue</card-category>
-          <card-title>$34,245</card-title>
+          <card-title>{{ totalRevenue }} €</card-title>
           <card-footer-icon>
             <i class="material-icons">date_range</i> Last 24 Hours
           </card-footer-icon>

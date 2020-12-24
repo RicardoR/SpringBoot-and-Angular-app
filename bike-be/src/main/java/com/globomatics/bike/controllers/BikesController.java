@@ -22,6 +22,7 @@ public class BikesController {
     @Autowired
     private BikeRepository bikeRepository;
 
+
     // Only executed when calling "api/v1/bikes" using a GET method
     @GetMapping
     public List<Bike> list() {
@@ -48,4 +49,15 @@ public class BikesController {
     public void delete(@PathVariable List<Long> idList) {
         idList.stream().forEach((id) -> bikeRepository.deleteById(id));
     }
+
+    @GetMapping("/total-sales")
+    public long getTotalSales() {
+        return bikeRepository.count();
+    }
+
+    @GetMapping("total-revenue")
+    public float getTotalRevenue() {
+        return bikeRepository.totalRevenue();
+    }
+
 }

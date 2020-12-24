@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Bike } from '../shared/model/bike.model';
+import { Bike } from '../../shared/model/bike.model';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
@@ -16,7 +16,7 @@ export class BikeService {
   private _basePath = '/server/api/v1/bikes';
 
   public getBikes(): Observable<Bike[]> {
-    let token = localStorage.getItem('access_token');
+    const token = localStorage.getItem('access_token');
 
     return this._http.get(this._basePath, {
       headers: new HttpHeaders().set('Authorization', `Bearer ${token}`),
@@ -49,8 +49,19 @@ export class BikeService {
     );
   }
 
-  private _getHeaders() {
-    let token = localStorage.getItem('access_token');
+  public getTotalSales(): Observable<any> {
+    return this._http.get(`${this._basePath}/total-sales`, this._getHeaders());
+  }
+
+  public getTotalRevenue(): Observable<any> {
+    return this._http.get(
+      `${this._basePath}/total-revenue`,
+      this._getHeaders()
+    );
+  }
+
+  private _getHeaders(): { headers: HttpHeaders } {
+    const token = localStorage.getItem('access_token');
     return {
       headers: new HttpHeaders().set('Authorization', `Bearer ${token}`),
     };

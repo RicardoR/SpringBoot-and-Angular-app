@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
-import { BikeService } from '../../services/bike.service';
+import { BikeService } from '../../core/services/bike.service';
 
 @Component({
   selector: 'app-home',
