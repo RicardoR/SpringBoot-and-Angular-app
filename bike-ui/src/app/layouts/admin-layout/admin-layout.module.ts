@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DashboardComponent } from '../../components/dashboard/dashboard.component';
@@ -32,5 +32,6 @@ import { AdminLayoutRoutingModule } from './admin-layout.routing.module';
     DashboardComponent,
     UserProfileComponent,
   ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class AdminLayoutModule {}

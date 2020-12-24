@@ -1,0 +1,18 @@
+<div class="card card-stats">
+  <div class="card-header {{ cardType }} card-header-icon">
+    <div class="card-icon">
+      <ng-content select="card-header-icon"></ng-content>
+    </div>
+    <p class="card-category">
+      <ng-content select="card-category"></ng-content>
+    </p>
+    <h3 class="card-title">
+      <ng-content select="card-title"></ng-content>
+    </h3>
+  </div>
+  <div class="card-footer">
+    <div class="stats">
+      <ng-content select="card-footer-icon"></ng-content>
+    </div>
+  </div>
+</div>

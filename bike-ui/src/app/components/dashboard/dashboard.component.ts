@@ -1,138 +1,18 @@
+import { cardTypes } from './../stat-card/stat-card.component';
 import { Component, OnInit } from '@angular/core';
 import * as Chartist from 'chartist';
-
+import { AnimationChartService } from '../../services/animation-chart.service';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css'],
 })
 export class DashboardComponent implements OnInit {
-  constructor() {}
-  startAnimationForLineChart(chart: Chartist.IChartistLineChart) {
-    let seq: any, delays: any, durations: any;
-    seq = 0;
-    delays = 80;
-    durations = 500;
+  constructor(private _animationChartService: AnimationChartService) {}
+  public availableCardTypes = cardTypes;
 
-    chart.on(
-      'draw',
-      function (data: {
-        type: string;
-        element: {
-          animate: (arg0: {
-            d?: {
-              begin: number;
-              dur: number;
-              from: any;
-              to: any;
-              easing: Chartist.IChartistEasingDefinition;
-            };
-            opacity?: {
-              begin: number;
-              dur: any;
-              from: number;
-              to: number;
-              easing: string;
-            };
-          }) => void;
-        };
-        path: {
-          clone: () => {
-            (): any;
-            new (): any;
-            scale: {
-              (arg0: number, arg1: number): {
-                (): any;
-                new (): any;
-                translate: {
-                  (arg0: number, arg1: any): {
-                    (): any;
-                    new (): any;
-                    stringify: { (): any; new (): any };
-                  };
-                  new (): any;
-                };
-              };
-              new (): any;
-            };
-            stringify: { (): any; new (): any };
-          };
-        };
-        chartRect: { height: () => any };
-      }) {
-        if (data.type === 'line' || data.type === 'area') {
-          data.element.animate({
-            d: {
-              begin: 600,
-              dur: 700,
-              from: data.path
-                .clone()
-                .scale(1, 0)
-                .translate(0, data.chartRect.height())
-                .stringify(),
-              to: data.path.clone().stringify(),
-              easing: Chartist.Svg.Easing.easeOutQuint,
-            },
-          });
-        } else if (data.type === 'point') {
-          seq++;
-          data.element.animate({
-            opacity: {
-              begin: seq * delays,
-              dur: durations,
-              from: 0,
-              to: 1,
-              easing: 'ease',
-            },
-          });
-        }
-      }
-    );
-
-    seq = 0;
-  }
-  startAnimationForBarChart(chart: Chartist.IChartistBarChart) {
-    let seq2: any, delays2: any, durations2: any;
-
-    seq2 = 0;
-    delays2 = 80;
-    durations2 = 500;
-    chart.on(
-      'draw',
-      function (data: {
-        type: string;
-        element: {
-          animate: (arg0: {
-            opacity: {
-              begin: number;
-              dur: any;
-              from: number;
-              to: number;
-              easing: string;
-            };
-          }) => void;
-        };
-      }) {
-        if (data.type === 'bar') {
-          seq2++;
-          data.element.animate({
-            opacity: {
-              begin: seq2 * delays2,
-              dur: durations2,
-              from: 0,
-              to: 1,
-              easing: 'ease',
-            },
-          });
-        }
-      }
-    );
-
-    seq2 = 0;
-  }
   ngOnInit() {
     /* ----------==========     Daily Sales Chart initialization For Documentation    ==========---------- */
-
     const dataDailySalesChart: any = {
       labels: ['M', 'T', 'W', 'T', 'F', 'S', 'S'],
       series: [[12, 17, 7, 17, 23, 18, 38]],
@@ -152,8 +32,6 @@ export class DashboardComponent implements OnInit {
       dataDailySalesChart,
       optionsDailySalesChart
     );
-
-    this.startAnimationForLineChart(dailySalesChart);
 
     /* ----------==========     Completed Tasks Chart initialization    ==========---------- */
 
@@ -176,9 +54,6 @@ export class DashboardComponent implements OnInit {
       dataCompletedTasksChart,
       optionsCompletedTasksChart
     );
-
-    // start animation for the Completed Tasks Chart - Line Chart
-    this.startAnimationForLineChart(completedTasksChart);
 
     /* ----------==========     Emails Subscription Chart initialization    ==========---------- */
 
@@ -214,7 +89,9 @@ export class DashboardComponent implements OnInit {
       responsiveOptions
     );
 
-    //start animation for the Emails Subscription Chart
-    this.startAnimationForBarChart(websiteViewsChart);
+    //start animations:
+    this._animationChartService.startAnimationForBarChart(websiteViewsChart);
+    this._animationChartService.startAnimationForLineChart(completedTasksChart);
+    this._animationChartService.startAnimationForLineChart(dailySalesChart);
   }
 }
