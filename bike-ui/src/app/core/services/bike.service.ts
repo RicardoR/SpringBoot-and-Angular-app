@@ -25,7 +25,7 @@ export class BikeService {
 
   public getBike(id: number): Observable<Bike> {
     return this._http.get(
-      `${this._basePath}/+${id}`,
+      `${this._basePath}/${id}`,
       this._getHeaders()
     ) as Observable<Bike>;
   }
@@ -49,15 +49,32 @@ export class BikeService {
     );
   }
 
-  public getTotalSales(): Observable<any> {
-    return this._http.get(`${this._basePath}/total-sales`, this._getHeaders());
+  public getTotalSales(): Observable<number> {
+    return this._http.get(
+      `${this._basePath}/total-sales`,
+      this._getHeaders()
+    ) as Observable<number>;
   }
 
-  public getTotalRevenue(): Observable<any> {
+  public getTotalRevenue(): Observable<number> {
     return this._http.get(
       `${this._basePath}/total-revenue`,
       this._getHeaders()
-    );
+    ) as Observable<number>;
+  }
+
+  public getTotalIssuesWithSerialNumber(): Observable<number> {
+    return this._http.get(
+      `${this._basePath}/total-serial-number-issues`,
+      this._getHeaders()
+    ) as Observable<number>;
+  }
+
+  public getTotalContactPerson(): Observable<number> {
+    return this._http.get(
+      `${this._basePath}/total-contact-person`,
+      this._getHeaders()
+    ) as Observable<number>;
   }
 
   private _getHeaders(): { headers: HttpHeaders } {

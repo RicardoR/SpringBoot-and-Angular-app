@@ -4,6 +4,13 @@ import * as Chartist from 'chartist';
 import { AnimationChartService } from '../../core/services/animation-chart.service';
 import { ActivatedRoute } from '@angular/router';
 
+interface ScreenData {
+  serialNumberIssues: string;
+  totalContactPerson: string;
+  totalSales: number;
+  totalRevenue: number;
+}
+
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -11,8 +18,8 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class DashboardComponent implements OnInit {
   public availableCardTypes = cardTypes;
-  public totalSales: number;
-  public totalRevenue: number;
+
+  public screenData: ScreenData;
 
   constructor(
     private _animationChartService: AnimationChartService,
@@ -20,13 +27,25 @@ export class DashboardComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.totalSales = this._route.snapshot.data.dashboardData.totalSales;
-    this.totalRevenue = this._route.snapshot.data.dashboardData.totalRevenue;
+    this.screenData = this._route.snapshot.data.dashboardData;
 
     /* ----------==========     Daily Sales Chart initialization For Documentation    ==========---------- */
     const dataDailySalesChart: any = {
-      labels: ['M', 'T', 'W', 'T', 'F', 'S', 'S'],
-      series: [[12, 17, 7, 17, 23, 18, 38]],
+      labels: [
+        'Jan',
+        'Feb',
+        'Mar',
+        'Apr',
+        'May',
+        'Jun',
+        'Jul',
+        'Ag',
+        'Sep',
+        'Oct',
+        'Nov',
+        'Dec',
+      ],
+      series: [[12, 17, 7, 17, 23, 18, 38, 12, 150, 50, 0, 0]],
     };
 
     const optionsDailySalesChart: any = {
@@ -34,7 +53,7 @@ export class DashboardComponent implements OnInit {
         tension: 0,
       }),
       low: 0,
-      high: 50, // creative tim: we recommend you to set the high sa the biggest value + something for a better look
+      high: 200, // creative tim: we recommend you to set the high sa the biggest value + something for a better look
       chartPadding: { top: 0, right: 0, bottom: 0, left: 0 },
     };
 

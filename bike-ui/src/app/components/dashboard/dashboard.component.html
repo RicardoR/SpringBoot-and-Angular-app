@@ -2,12 +2,12 @@
   <div class="container-fluid">
     <div class="row">
       <div class="col-lg-3 col-md-6 col-sm-6">
-        <app-stat-card cardType="{{ availableCardTypes.success }}">
+        <app-stat-card cardType="{{ availableCardTypes.warning }}">
           <card-header-icon>
             <i class="material-icons">assessment</i>
           </card-header-icon>
           <card-category>Total sales</card-category>
-          <card-title>{{ totalSales }} </card-title>
+          <card-title>{{ screenData.totalSales }} </card-title>
           <card-footer-icon>
             <i class="material-icons">update</i> Just Updated
           </card-footer-icon>
@@ -19,7 +19,7 @@
             <i class="material-icons">store</i>
           </card-header-icon>
           <card-category>Revenue</card-category>
-          <card-title>{{ totalRevenue }} €</card-title>
+          <card-title>{{ screenData.totalRevenue }} €</card-title>
           <card-footer-icon>
             <i class="material-icons">date_range</i> Last 24 Hours
           </card-footer-icon>
@@ -30,8 +30,8 @@
           <card-header-icon>
             <i class="material-icons">info_outline</i>
           </card-header-icon>
-          <card-category>Fixed issues</card-category>
-          <card-title>75</card-title>
+          <card-category>Bikes without SN</card-category>
+          <card-title> {{ screenData.serialNumberIssues }} </card-title>
           <card-footer-icon>
             <i class="material-icons">local_offer</i> Tracked from Github
           </card-footer-icon>
@@ -41,7 +41,7 @@
         <app-stat-card cardType="{{ availableCardTypes.info }}">
           <card-header-icon> <i class="fa fa-twitter"></i> </card-header-icon>
           <card-category>Followers</card-category>
-          <card-title>+245</card-title>
+          <card-title> {{ screenData.totalContactPerson }} </card-title>
           <card-footer-icon>
             <i class="material-icons">update</i> Just Updated
           </card-footer-icon>
@@ -49,7 +49,7 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-md-4">
+      <div class="col-md-6">
         <div class="card card-chart">
           <div class="card-header card-header-success">
             <div class="ct-chart" id="dailySalesChart"></div>
@@ -70,7 +70,7 @@
           </div>
         </div>
       </div>
-      <div class="col-md-4">
+      <div class="col-md-6">
         <div class="card card-chart">
           <div class="card-header card-header-warning">
             <div class="ct-chart" id="websiteViewsChart"></div>
@@ -86,7 +86,7 @@
           </div>
         </div>
       </div>
-      <div class="col-md-4">
+      <!-- <div class="col-md-4">
         <div class="card card-chart">
           <div class="card-header card-header-danger">
             <div class="ct-chart" id="completedTasksChart"></div>
@@ -101,10 +101,10 @@
             </div>
           </div>
         </div>
-      </div>
+      </div> -->
     </div>
     <div class="row">
-      <div class="col-lg-6 col-md-12">
+      <div class="col-lg-12 col-md-12">
         <div class="card">
           <div class="card-header card-header-tabs card-header-primary">
             <div class="nav-tabs-navigation">
@@ -539,7 +539,7 @@
           </div>
         </div>
       </div>
-      <div class="col-lg-6 col-md-12">
+      <!-- <div class="col-lg-6 col-md-12">
         <div class="card">
           <div class="card-header card-header-warning">
             <h4 class="card-title">Employees Stats</h4>
@@ -582,7 +582,7 @@
             </table>
           </div>
         </div>
-      </div>
+      </div> -->
     </div>
   </div>
 </div>
