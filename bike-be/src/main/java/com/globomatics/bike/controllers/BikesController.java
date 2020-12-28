@@ -3,6 +3,7 @@ package com.globomatics.bike.controllers;
 import java.util.List;
 
 import com.globomatics.bike.models.Bike;
+import com.globomatics.bike.models.SalesPerMonth;
 import com.globomatics.bike.models.repositories.BikeRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +22,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class BikesController {
     @Autowired
     private BikeRepository bikeRepository;
-
 
     // Only executed when calling "api/v1/bikes" using a GET method
     @GetMapping
@@ -44,7 +44,7 @@ public class BikesController {
     public void delete(@PathVariable("id") long id) {
         bikeRepository.deleteById(id);
     }
-    
+
     @DeleteMapping("/multi/{idList}")
     public void delete(@PathVariable List<Long> idList) {
         idList.stream().forEach((id) -> bikeRepository.deleteById(id));
@@ -58,6 +58,21 @@ public class BikesController {
     @GetMapping("total-revenue")
     public float getTotalRevenue() {
         return bikeRepository.totalRevenue();
+    }
+
+    @GetMapping("total-serial-number-issues")
+    public String getTotalSerialNumberIssues() {
+        return bikeRepository.totalWithoutSerialNumber();
+    }
+
+    @GetMapping("total-contact-person")
+    public String getTotalContactPersons() {
+        return bikeRepository.totalContactPersons();
+    }
+
+    @GetMapping("last-year-sales-per-month")
+    public List<SalesPerMonth> getLastSalesPerMonth() {
+        return bikeRepository.lastSalesPerMonths();
     }
 
 }
