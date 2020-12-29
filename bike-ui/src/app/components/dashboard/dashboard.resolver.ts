@@ -1,3 +1,4 @@
+import { DashboardScreenData } from './DashboardModels';
 import { BikeService } from '../../core/services/bike.service';
 import { Injectable } from '@angular/core';
 import {
@@ -8,20 +9,21 @@ import {
 import { forkJoin, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-// todo: change Resolve<any> to the right property type
+// todo: refactor ==> get totals in one method
 @Injectable({ providedIn: 'root' })
-export class DashboardResolver implements Resolve<number> {
+export class DashboardResolver implements Resolve<DashboardScreenData> {
   constructor(private _bikesService: BikeService) {}
 
   resolve(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
-  ): Observable<any> {
+  ): Observable<DashboardScreenData> {
     return forkJoin([
       this._bikesService.getTotalSales(),
       this._bikesService.getTotalRevenue(),
       this._bikesService.getTotalIssuesWithSerialNumber(),
       this._bikesService.getTotalContactPerson(),
+      this._bikesService.getCurrentSalesPerMonth(),
     ]).pipe(
       map((result: any[]) => {
         return {
@@ -29,6 +31,7 @@ export class DashboardResolver implements Resolve<number> {
           totalRevenue: result[1],
           serialNumberIssues: result[2],
           totalContactPerson: result[3],
+          salesPerMonth: result[4],
         };
       })
     );
