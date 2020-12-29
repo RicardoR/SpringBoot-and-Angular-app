@@ -70,9 +70,8 @@ public class BikesController {
         return bikeRepository.totalContactPersons();
     }
 
-    @GetMapping("last-year-sales-per-month")
+    @GetMapping("current-sales-per-month")
     public List<SalesPerMonth> getLastSalesPerMonth() {
         return bikeRepository.lastSalesPerMonths();
     }
-
 }

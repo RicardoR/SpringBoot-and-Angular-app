@@ -1,3 +1,4 @@
+import { SalesPerMonth } from './../models/SalesPerMonth';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -75,6 +76,13 @@ export class BikeService {
       `${this._basePath}/total-contact-person`,
       this._getHeaders()
     ) as Observable<number>;
+  }
+
+  public getCurrentSalesPerMonth(): Observable<SalesPerMonth> {
+    return this._http.get(
+      `${this._basePath}/current-sales-per-month`,
+      this._getHeaders()
+    ) as Observable<SalesPerMonth>;
   }
 
   private _getHeaders(): { headers: HttpHeaders } {

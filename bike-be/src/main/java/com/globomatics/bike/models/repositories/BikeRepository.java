@@ -10,7 +10,9 @@ import java.util.List;
 
 public interface BikeRepository extends JpaRepository<Bike, Long> {
     
-    @Query("SELECT sum(b.purchasePrice) from Bike b")
+    @Query("SELECT sum(b.purchasePrice) "
+            + "FROM Bike b "
+            + "WHERE strftime('%Y', DATE(ROUND(b.purchaseDate / 1000), 'unixepoch')) = strftime('%Y', DATE('now'))")
     Float totalRevenue();
     
     @Query("SELECT count(*) from Bike where serialNumber is NULL")
