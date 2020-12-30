@@ -6,8 +6,8 @@
           <card-header-icon>
             <i class="material-icons">assessment</i>
           </card-header-icon>
-          <card-category>Total sales</card-category>
-          <card-title>{{ screenData.totalSales }} </card-title>
+          <card-category>Total sales this year</card-category>
+          <card-title>{{ screenData.statisticalData.totalSales }} </card-title>
           <card-footer-icon>
             <i class="material-icons">update</i> Just Updated
           </card-footer-icon>
@@ -19,7 +19,9 @@
             <i class="material-icons">store</i>
           </card-header-icon>
           <card-category>Revenue</card-category>
-          <card-title>{{ screenData.totalRevenue }} €</card-title>
+          <card-title>
+            {{ screenData.statisticalData.totalRevenue }} €
+          </card-title>
           <card-footer-icon>
             <i class="material-icons">date_range</i> Current year
           </card-footer-icon>
@@ -31,7 +33,9 @@
             <i class="material-icons">info_outline</i>
           </card-header-icon>
           <card-category>Bikes without SN</card-category>
-          <card-title> {{ screenData.serialNumberIssues }} </card-title>
+          <card-title>
+            {{ screenData.statisticalData.totalSerialNumberIssues }}
+          </card-title>
           <card-footer-icon>
             <i class="material-icons">local_offer</i> Total issues
           </card-footer-icon>
@@ -41,7 +45,9 @@
         <app-stat-card cardType="{{ availableCardTypes.info }}">
           <card-header-icon> <i class="fa fa-twitter"></i> </card-header-icon>
           <card-category>Followers</card-category>
-          <card-title> {{ screenData.totalContactPerson }} </card-title>
+          <card-title>
+            {{ screenData.statisticalData.totalContactPerson }}
+          </card-title>
           <card-footer-icon>
             <i class="material-icons">update</i> Just Updated
           </card-footer-icon>

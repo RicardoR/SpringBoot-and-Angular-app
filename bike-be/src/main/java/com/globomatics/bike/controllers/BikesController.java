@@ -3,8 +3,9 @@ package com.globomatics.bike.controllers;
 import java.util.List;
 
 import com.globomatics.bike.models.Bike;
-import com.globomatics.bike.models.SalesPerMonth;
-import com.globomatics.bike.models.SalesPerYear;
+import com.globomatics.bike.models.BikeStatisticalData;
+import com.globomatics.bike.models.MonthlySales;
+import com.globomatics.bike.models.YearlySales;
 import com.globomatics.bike.repositories.BikeRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,33 +52,25 @@ public class BikesController {
         idList.stream().forEach((id) -> bikeRepository.deleteById(id));
     }
 
-    @GetMapping("/total-sales")
-    public long getTotalSales() {
-        return bikeRepository.count();
+    @GetMapping("/statistical-data")
+    public BikeStatisticalData getStatisticalData() {
+        BikeStatisticalData statisticalData = new BikeStatisticalData();
+        
+        statisticalData.setTotalSales(bikeRepository.count());
+        statisticalData.setTotalContactPerson(bikeRepository.totalContactPersons());
+        statisticalData.setTotalRevenue(bikeRepository.totalRevenue());
+        statisticalData.setTotalSerialNumberIssues(bikeRepository.totalWithoutSerialNumber());
+
+        return statisticalData;
     }
 
-    @GetMapping("total-revenue")
-    public float getTotalRevenue() {
-        return bikeRepository.totalRevenue();
+    @GetMapping("/monthly-sales/{year}")
+    public List<MonthlySales> getMonthlySales(@PathVariable("year") String year) {
+        return bikeRepository.monthlySales(year);
     }
 
-    @GetMapping("total-serial-number-issues")
-    public String getTotalSerialNumberIssues() {
-        return bikeRepository.totalWithoutSerialNumber();
-    }
-
-    @GetMapping("total-contact-person")
-    public String getTotalContactPersons() {
-        return bikeRepository.totalContactPersons();
-    }
-
-    @GetMapping("current-sales-per-month")
-    public List<SalesPerMonth> getLastSalesPerMonth() {
-        return bikeRepository.lastSalesPerMonths();
-    }
-
-    @GetMapping("sales-per-year")
-    public List<SalesPerYear> getSalesPerYear() {
-        return bikeRepository.salesPerYear();
+    @GetMapping("/yearly-sales")
+    public List<YearlySales> getYearlySales() {
+        return bikeRepository.yearlySales();
     }
 }

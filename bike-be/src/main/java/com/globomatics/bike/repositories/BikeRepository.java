@@ -1,8 +1,8 @@
 package com.globomatics.bike.repositories;
 
 import com.globomatics.bike.models.Bike;
-import com.globomatics.bike.models.SalesPerMonth;
-import com.globomatics.bike.models.SalesPerYear;
+import com.globomatics.bike.models.MonthlySales;
+import com.globomatics.bike.models.YearlySales;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -26,13 +26,13 @@ public interface BikeRepository extends JpaRepository<Bike, Long> {
                     + "FROM Months m "
                     + "LEFT JOIN Bike b " 
                     + "ON strftime('%m', DATE(ROUND(purchase_date / 1000), 'unixepoch')) = m.id "
-                    + "AND strftime('%Y', DATE(ROUND(b.purchase_date / 1000), 'unixepoch')) = strftime('%Y', DATE('now')) "
+                    + "AND strftime('%Y', DATE(ROUND(b.purchase_date / 1000), 'unixepoch')) = ?1 "
                     + "GROUP BY  m.name, strftime('%m', DATE(ROUND(b.purchase_date / 1000), 'unixepoch')) "
 	                + "ORDER BY m.id", nativeQuery=true)
-    List<SalesPerMonth> lastSalesPerMonths();
+    List<MonthlySales> monthlySales(String year);
 
     @Query(value = "SELECT IFNULL (SUM(b.purchase_price), 0) as purchase, strftime('%Y', DATE(ROUND(b.purchase_date / 1000), 'unixepoch')) as year "
                     + "FROM bike b " 
                     + "GROUP BY strftime('%Y', DATE(ROUND(b.purchase_date / 1000), 'unixepoch'))", nativeQuery = true)
-    List<SalesPerYear> salesPerYear();
+    List<YearlySales> yearlySales();
 }

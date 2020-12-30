@@ -1,5 +1,5 @@
 package com.globomatics.bike.models;
-public interface SalesPerMonth {
+public interface MonthlySales {
     String getMonth();
 
     Float getPurchase();

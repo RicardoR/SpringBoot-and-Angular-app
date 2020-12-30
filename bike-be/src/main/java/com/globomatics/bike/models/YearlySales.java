@@ -1,6 +1,6 @@
 package com.globomatics.bike.models;
 
-public interface SalesPerYear {
+public interface YearlySales {
     String getYear();
 
     Float getPurchase();

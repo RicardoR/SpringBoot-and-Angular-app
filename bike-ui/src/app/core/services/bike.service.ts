@@ -1,6 +1,7 @@
 import {
   SalesPerMonth,
-  SalesPerYear,
+  SalesPerYear as YearlySales,
+  StatisticalData,
 } from './../../components/dashboard/DashboardModels';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -53,46 +54,25 @@ export class BikeService {
     );
   }
 
-  public getTotalSales(): Observable<number> {
+  public getStatisticalData(): Observable<StatisticalData> {
     return this._http.get(
-      `${this._basePath}/total-sales`,
+      `${this._basePath}/statistical-data`,
       this._getHeaders()
-    ) as Observable<number>;
+    ) as Observable<StatisticalData>;
   }
 
-  public getTotalRevenue(): Observable<number> {
+  public getMonthlySales(year: number): Observable<SalesPerMonth> {
     return this._http.get(
-      `${this._basePath}/total-revenue`,
-      this._getHeaders()
-    ) as Observable<number>;
-  }
-
-  public getTotalIssuesWithSerialNumber(): Observable<number> {
-    return this._http.get(
-      `${this._basePath}/total-serial-number-issues`,
-      this._getHeaders()
-    ) as Observable<number>;
-  }
-
-  public getTotalContactPerson(): Observable<number> {
-    return this._http.get(
-      `${this._basePath}/total-contact-person`,
-      this._getHeaders()
-    ) as Observable<number>;
-  }
-
-  public getCurrentSalesPerMonth(): Observable<SalesPerMonth> {
-    return this._http.get(
-      `${this._basePath}/current-sales-per-month`,
+      `${this._basePath}/monthly-sales/${year}`,
       this._getHeaders()
     ) as Observable<SalesPerMonth>;
   }
 
-  public getSalesPerYear(): Observable<SalesPerYear> {
+  public getYearlySales(): Observable<YearlySales> {
     return this._http.get(
-      `${this._basePath}/sales-per-year`,
+      `${this._basePath}/yearly-sales`,
       this._getHeaders()
-    ) as Observable<SalesPerYear>;
+    ) as Observable<YearlySales>;
   }
 
   private _getHeaders(): { headers: HttpHeaders } {

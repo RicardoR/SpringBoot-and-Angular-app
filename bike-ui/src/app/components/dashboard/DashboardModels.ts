@@ -1,10 +1,7 @@
 export interface DashboardScreenData {
   salesPerMonth: SalesPerMonth[];
   salesPerYear: SalesPerYear[];
-  serialNumberIssues: string;
-  totalContactPerson: string;
-  totalSales: number;
-  totalRevenue: number;
+  statisticalData: StatisticalData;
 }
 export interface SalesGraph {
   labels: string[];
@@ -18,4 +15,11 @@ export interface SalesPerMonth {
 export interface SalesPerYear {
   purchase: number;
   year: string;
+}
+
+export interface StatisticalData {
+  totalContactPerson: string;
+  totalSales: number;
+  totalSerialNumberIssues: string;
+  totalRevenue: number;
 }
