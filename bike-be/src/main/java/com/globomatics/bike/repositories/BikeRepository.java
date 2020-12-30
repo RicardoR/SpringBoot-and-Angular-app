@@ -1,7 +1,8 @@
-package com.globomatics.bike.models.repositories;
+package com.globomatics.bike.repositories;
 
 import com.globomatics.bike.models.Bike;
 import com.globomatics.bike.models.SalesPerMonth;
+import com.globomatics.bike.models.SalesPerYear;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -29,4 +30,9 @@ public interface BikeRepository extends JpaRepository<Bike, Long> {
                     + "GROUP BY  m.name, strftime('%m', DATE(ROUND(b.purchase_date / 1000), 'unixepoch')) "
 	                + "ORDER BY m.id", nativeQuery=true)
     List<SalesPerMonth> lastSalesPerMonths();
+
+    @Query(value = "SELECT IFNULL (SUM(b.purchase_price), 0) as purchase, strftime('%Y', DATE(ROUND(b.purchase_date / 1000), 'unixepoch')) as year "
+                    + "FROM bike b " 
+                    + "GROUP BY strftime('%Y', DATE(ROUND(b.purchase_date / 1000), 'unixepoch'))", nativeQuery = true)
+    List<SalesPerYear> salesPerYear();
 }

@@ -4,7 +4,8 @@ import java.util.List;
 
 import com.globomatics.bike.models.Bike;
 import com.globomatics.bike.models.SalesPerMonth;
-import com.globomatics.bike.models.repositories.BikeRepository;
+import com.globomatics.bike.models.SalesPerYear;
+import com.globomatics.bike.repositories.BikeRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -73,5 +74,10 @@ public class BikesController {
     @GetMapping("current-sales-per-month")
     public List<SalesPerMonth> getLastSalesPerMonth() {
         return bikeRepository.lastSalesPerMonths();
+    }
+
+    @GetMapping("sales-per-year")
+    public List<SalesPerYear> getSalesPerYear() {
+        return bikeRepository.salesPerYear();
     }
 }
