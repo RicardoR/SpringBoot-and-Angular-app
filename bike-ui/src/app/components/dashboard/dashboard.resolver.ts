@@ -24,6 +24,7 @@ export class DashboardResolver implements Resolve<DashboardScreenData> {
       this._bikesService.getTotalIssuesWithSerialNumber(),
       this._bikesService.getTotalContactPerson(),
       this._bikesService.getCurrentSalesPerMonth(),
+      this._bikesService.getSalesPerYear(),
     ]).pipe(
       map((result: any[]) => {
         return {
@@ -32,6 +33,7 @@ export class DashboardResolver implements Resolve<DashboardScreenData> {
           serialNumberIssues: result[2],
           totalContactPerson: result[3],
           salesPerMonth: result[4],
+          salesPerYear: result[5],
         };
       })
     );

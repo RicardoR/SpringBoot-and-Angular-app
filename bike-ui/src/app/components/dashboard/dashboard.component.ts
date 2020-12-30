@@ -1,5 +1,9 @@
-import { SalesPerMonth } from './../../core/models/SalesPerMonth';
-import { DashboardScreenData, SalesPerMonthGraph } from './DashboardModels';
+import {
+  DashboardScreenData,
+  SalesGraph,
+  SalesPerMonth,
+  SalesPerYear,
+} from './DashboardModels';
 import { cardTypes } from './../stat-card/stat-card.component';
 import { Component, OnInit } from '@angular/core';
 import * as Chartist from 'chartist';
@@ -23,7 +27,11 @@ export class DashboardComponent implements OnInit {
   ngOnInit(): void {
     this.screenData = this._route.snapshot.data.dashboardData;
 
-    /* ----------==========     Monthly Sales Chart initialization For Documentation    ==========---------- */
+    this._initMonthSalesChart();
+    this._initYearSalesChart();
+  }
+
+  private _initMonthSalesChart(): void {
     const labels = Array.from(
       this.screenData.salesPerMonth,
       (data: SalesPerMonth) => data.month.substring(0, 3)
@@ -34,12 +42,12 @@ export class DashboardComponent implements OnInit {
       (data: SalesPerMonth) => data.purchase
     );
 
-    const dataDailySalesChart: SalesPerMonthGraph = {
+    const dataMonthlySalesChart: SalesGraph = {
       labels,
       series: [series],
     };
 
-    const optionsDailySalesChart: any = {
+    const optionsMonthlySalesChart: any = {
       lineSmooth: Chartist.Interpolation.cardinal({
         tension: 0,
       }),
@@ -48,26 +56,40 @@ export class DashboardComponent implements OnInit {
       chartPadding: { top: 0, right: 0, bottom: 0, left: 0 },
     };
 
-    const dailySalesChart = new Chartist.Line(
-      '#dailySalesChart',
-      dataDailySalesChart,
-      optionsDailySalesChart
+    const monthlySalesChart = new Chartist.Line(
+      '#monthlySalesChart',
+      dataMonthlySalesChart,
+      optionsMonthlySalesChart
     );
 
-    /* ----------==========     Emails Subscription Chart initialization    ==========---------- */
+    this._animationChartService.startAnimationForLineChart(monthlySalesChart);
+  }
 
-    const datawebsiteViewsChart = {
-      labels: ['J', 'F', 'M', 'A', 'M', 'J', 'J', 'A', 'S', 'O', 'N', 'D'],
-      series: [[542, 443, 320, 780, 553, 453, 326, 434, 568, 610, 756, 895]],
+  private _initYearSalesChart(): void {
+    const labels = Array.from(
+      this.screenData.salesPerYear,
+      (data: SalesPerYear) => data.year
+    );
+
+    const series = Array.from(
+      this.screenData.salesPerYear,
+      (data: SalesPerYear) => data.purchase
+    );
+
+    const dataYearSalesChart: SalesGraph = {
+      labels,
+      series: [series],
     };
-    const optionswebsiteViewsChart = {
+
+    const optionsYearSalesChart = {
       axisX: {
         showGrid: false,
       },
       low: 0,
-      high: 1000,
+      high: Math.max(...series),
       chartPadding: { top: 0, right: 5, bottom: 0, left: 0 },
     };
+    
     const responsiveOptions: any[] = [
       [
         'screen and (max-width: 640px)',
@@ -81,15 +103,13 @@ export class DashboardComponent implements OnInit {
         },
       ],
     ];
-    const websiteViewsChart = new Chartist.Bar(
-      '#websiteViewsChart',
-      datawebsiteViewsChart,
-      optionswebsiteViewsChart,
+    const yearSalesChart = new Chartist.Bar(
+      '#yearSalesChart',
+      dataYearSalesChart,
+      optionsYearSalesChart,
       responsiveOptions
     );
 
-    // start animations:
-    this._animationChartService.startAnimationForBarChart(websiteViewsChart);
-    this._animationChartService.startAnimationForLineChart(dailySalesChart);
+    this._animationChartService.startAnimationForBarChart(yearSalesChart);
   }
 }
