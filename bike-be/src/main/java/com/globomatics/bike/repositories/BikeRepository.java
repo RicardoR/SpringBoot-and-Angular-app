@@ -35,4 +35,6 @@ public interface BikeRepository extends JpaRepository<Bike, Long> {
                     + "FROM bike b " 
                     + "GROUP BY strftime('%Y', DATE(ROUND(b.purchase_date / 1000), 'unixepoch'))", nativeQuery = true)
     List<YearlySales> yearlySales();
+
+    List<Bike> findTop5ByOrderByIdDesc();
 }

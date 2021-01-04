@@ -55,10 +55,11 @@ public class BikesController {
     @GetMapping("/statistical-data")
     public BikeStatisticalData getStatisticalData() {
         BikeStatisticalData statisticalData = new BikeStatisticalData();
+        float totalRevenue = bikeRepository.totalRevenue() == null ? 0 : bikeRepository.totalRevenue();
         
         statisticalData.setTotalSales(bikeRepository.count());
         statisticalData.setTotalContactPerson(bikeRepository.totalContactPersons());
-        statisticalData.setTotalRevenue(bikeRepository.totalRevenue());
+        statisticalData.setTotalRevenue(totalRevenue);
         statisticalData.setTotalSerialNumberIssues(bikeRepository.totalWithoutSerialNumber());
 
         return statisticalData;
@@ -72,5 +73,10 @@ public class BikesController {
     @GetMapping("/yearly-sales")
     public List<YearlySales> getYearlySales() {
         return bikeRepository.yearlySales();
+    }
+    
+    @GetMapping("/last-detail-sales")
+    public List<Bike> getLastSales() {
+        return bikeRepository.findTop5ByOrderByIdDesc();
     }
 }
