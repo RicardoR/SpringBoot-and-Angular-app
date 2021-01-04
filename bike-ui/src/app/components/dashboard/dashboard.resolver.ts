@@ -21,12 +21,14 @@ export class DashboardResolver implements Resolve<DashboardScreenData> {
       this._bikesService.getStatisticalData(),
       this._bikesService.getMonthlySales(new Date().getFullYear()),
       this._bikesService.getYearlySales(),
+      this._bikesService.getLastDetailSales(),
     ]).pipe(
       map((result: any[]) => {
         return {
           statisticalData: result[0],
           salesPerMonth: result[1],
           salesPerYear: result[2],
+          lastDetailSales: result[3],
         };
       })
     );

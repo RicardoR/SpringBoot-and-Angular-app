@@ -75,6 +75,13 @@ export class BikeService {
     ) as Observable<YearlySales>;
   }
 
+  public getLastDetailSales(): Observable<Bike[]> {
+    return this._http.get(
+      `${this._basePath}/last-detail-sales`,
+      this._getHeaders()
+    ) as Observable<Bike[]>;
+  }
+
   private _getHeaders(): { headers: HttpHeaders } {
     const token = localStorage.getItem('access_token');
     return {

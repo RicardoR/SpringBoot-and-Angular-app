@@ -1,4 +1,7 @@
+import { Bike } from 'src/app/shared/model/bike.model';
+
 export interface DashboardScreenData {
+  lastDetailSales: Bike[];
   salesPerMonth: SalesPerMonth[];
   salesPerYear: SalesPerYear[];
   statisticalData: StatisticalData;

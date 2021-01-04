@@ -89,7 +89,7 @@ export class DashboardComponent implements OnInit {
       high: Math.max(...series),
       chartPadding: { top: 0, right: 5, bottom: 0, left: 0 },
     };
-    
+
     const responsiveOptions: any[] = [
       [
         'screen and (max-width: 640px)',
